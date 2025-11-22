@@ -1,0 +1,40 @@
+🔶 Hoos Who? ⚔️
+
+An AI-powered network assistant for UVA Darden MSBA students to connect with classmates based on career backgrounds.
+
+What It Does
+
+Hoos Who? helps students quickly find classmates with relevant industry experience or connections at target companies through natural language questions.
+
+**Example queries:**
+- *Who works at ICF?*
+- *Who has government contracting/consulting experience?*
+- *Find me someone in the cohort who worked in tech and finance*
+- *Who should I talk to about breaking in finance or fintech?*
+
+Features
+
+✨ **Natural language search** - Ask questions conversationally  
+✨ **UVA-themed interface** - Orange and navy branding throughout  
+✨ **Smart matching** - Claude AI understands intent and context  
+✨ **Instant contact info** - LinkedIn and email included in responses  
+✨ **Searchable company directory** - Alphabetized with filter 
+
+Tech Stack
+
+- **Frontend:** Streamlit (Python)
+- **AI:** Claude Sonnet 4 API (Anthropic)
+- **Data:** CSV (easily maintainable)
+- **Cost:** ~$5-10/month for 50 students
+
+Usage
+
+1. Type your question in the chat input
+2. Claude AI searches through the student database
+3. Get personalized recommendations with contact info
+
+Author
+
+Built by Izzie for the UVA Darden MSBA Class of 2026
+
+**Wahoowa!** 🔶⚔️
