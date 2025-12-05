@@ -403,6 +403,102 @@ st.markdown("""
 
 st.markdown("---")
 
+import streamlit as st
+
+# --- Initial State Setup ---
+if 'shown_welcome' not in st.session_state:
+    st.session_state.shown_welcome = False
+
+# Career Services Modal Popup with UVA Imagery
+@st.dialog("University of Virginia  |  Darden School of Business", width="large")
+def show_career_services_modal():
+    """Modal popup with career services reminder"""
+    
+    # 1. Apply global CSS styles for the modal background and centering
+    st.markdown("""
+        <style>
+        /* Style the modal with sidebar colors */
+        [data-testid="stDialog"] {
+            background: linear-gradient(180deg, #232D4B 0%, #1a3a5c 100%);
+        }
+        [data-testid="stDialog"] * {
+            color: white !important;
+        }
+        /* Target the internal container of the dialog for full centering */
+        [data-testid="stVerticalBlock"] {
+            text-align: center;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+    
+    # --- Content Rendering using Native Streamlit Components ---
+    
+    # Logo: Wrapped in columns to force centering
+    logo_col1, logo_col2, logo_col3, logo_col4, logo_col5, logo_col6, logo_col7, logo_col8, logo_col9, logo_col10 = st.columns([1, 1, 1, 1, 1, 1, 1, 1, 1, 1])
+    with logo_col5:
+        st.image("https://media.cnn.com/api/v1/images/stellar/prod/200617130257-01-uva-reworked-logo-0616.jpg?q=x_0,y_0,h_1687,w_2997,c_fill/h_653,w_1160/f_avif", 
+                 width=120)
+    
+    # Header and Introduction 
+    st.markdown("<h2 style='color: white; margin-bottom: 1rem; font-size: 2rem;'>Welcome to Hoos Who?</h2>", unsafe_allow_html=True)
+    st.markdown("<p style='color: white; font-size: 1.1rem; line-height: 1.6;'>Before you start exploring your classmate connections...</p>", unsafe_allow_html=True)
+
+    # Message box with UVA Grounds background (Text is centered here)
+    message_box_html = (
+        "<div style='position: relative; padding: 2rem; border-radius: 15px; border: 3px solid #E57200; "
+        "margin: 1.5rem 1rem; overflow: hidden;'>"
+        
+        # Background image layer
+        "<div style='position: absolute; top: 0; left: 0; right: 0; bottom: 0;"
+        "background-image: url(\"https://news.virginia.edu/sites/default/files/sunset_grounds_ss_18.jpg\");"
+        "background-size: cover; background-position: center; opacity: 0.60; z-index: 0;'></div>"
+        
+        # Content layer (on top of background)
+        "<div style='position: relative; z-index: 1; text-align: center;'>" 
+        "<p style='color: white; font-size: 1.1rem; line-height: 1.7; margin: 0;'>"
+        "<strong style='color: #E57200; font-size: 1.3rem;'> Have you met with Darden Career Services yet?</strong><br><br>"
+        "Our career services professionals provide invaluable personalized advice, "
+        "resume reviews, interview prep, and strategic guidance that AI cannot replace. "
+        "They're extremely approachable and here to help!"
+        "</p>"
+        "</div>"
+        "</div>"
+    )
+    st.markdown(message_box_html, unsafe_allow_html=True)
+
+    # Link Button
+    st.markdown("""
+        <div style='text-align: center;'>
+            <p>
+                <a href='https://gtscandidate.mbafocus.com/Darden/Candidates/Authenticated/Advising/AdvisingAppointmentSignups.aspx' 
+                   target='_blank' 
+                   style='color: #E57200; 
+                          font-weight: 600; 
+                          text-decoration: none; 
+                          font-size: 1.05rem;
+                          padding: 0.75rem 1.5rem;
+                          background: rgba(229, 114, 0, 0.2);
+                          border-radius: 8px;
+                          display: inline-block;
+                          transition: all 0.3s ease;'>
+                   📅 Schedule a time to meet with them →
+                </a>
+            </p>
+        </div>
+    """, unsafe_allow_html=True)
+    
+    # Close button (Streamlit component)
+    st.markdown("<br>", unsafe_allow_html=True)
+    col1, col2, col3 = st.columns([1, 1, 1])
+    with col2:
+        if st.button("Got it! Let's explore", use_container_width=True, type="primary"):
+            st.session_state.shown_welcome = True
+            st.rerun()
+
+# Show modal on first visit
+if not st.session_state.shown_welcome:
+    show_career_services_modal()
+
 #Display chat history with enhanced styling
 for message in st.session_state.messages:
     if message["role"] == "user":
