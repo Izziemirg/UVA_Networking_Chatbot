@@ -2,6 +2,62 @@ import streamlit as st
 import pandas as pd
 import json
 from anthropic import Anthropic
+import logging
+from datetime import datetime, timedelta
+import os
+
+# Set up audit logging
+logging.basicConfig(
+    filename='hoos_who_audit.log',
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
+
+def sanitize_input(user_input):
+    """Sanitize user input to prevent injection attacks"""
+    if not user_input or not isinstance(user_input, str):
+        return ""
+    
+    # Remove potential script tags and SQL injection attempts
+    dangerous_patterns = [
+        '<script>', 'javascript:', 'onerror=', 'onclick=', 
+        'DROP TABLE', 'DELETE FROM', 'INSERT INTO', 'SELECT *',
+        '<iframe>', 'eval(', 'document.cookie'
+    ]
+    
+    sanitized = user_input
+    for pattern in dangerous_patterns:
+        sanitized = sanitized.replace(pattern, '')
+        sanitized = sanitized.replace(pattern.lower(), '')
+        sanitized = sanitized.replace(pattern.upper(), '')
+    
+    # Limit length to prevent abuse
+    return sanitized[:500]
+
+def check_rate_limit():
+    """Simple rate limiting - max 20 queries per hour per user"""
+    if 'query_times' not in st.session_state:
+        st.session_state.query_times = []
+    
+    # Remove queries older than 1 hour
+    current_time = datetime.now()
+    st.session_state.query_times = [
+        t for t in st.session_state.query_times 
+        if current_time - t < timedelta(hours=1)
+    ]
+    
+    # Check if user has exceeded limit
+    if len(st.session_state.query_times) >= 20:
+        return False
+    
+    # Add current query time
+    st.session_state.query_times.append(current_time)
+    return True
+
+def log_query(query_length, response_length, success=True):
+    """Log queries for audit purposes (without storing actual content)"""
+    status = "SUCCESS" if success else "FAILED"
+    logging.info(f"Query - Status: {status}, Query Length: {query_length}, Response Length: {response_length}")
 
 #UVA Color Scheme (Official Colors)
 UVA_ORANGE = "#E57200"
@@ -234,11 +290,15 @@ def load_student_data():
 
 #Initialize Claude client
 def get_claude_client():
-    if "ANTHROPIC_API_KEY" not in st.secrets:
-        st.error("ANTHROPIC_API_KEY not found in Streamlit secrets!")
-        return None
+    """Get Claude client with secure API key handling"""
+    api_key = os.environ.get('ANTHROPIC_API_KEY')
     
-    return Anthropic(api_key=st.secrets["ANTHROPIC_API_KEY"])
+    if not api_key:
+        st.error("⚠️ API key not configured. Please contact administrator.")
+        logging.error("API key missing - application cannot function")
+        st.stop()
+    
+    return Anthropic(api_key=api_key)
 
 #System prompt for Claude
 SYSTEM_PROMPT = """You are "Hoos Who?" - a helpful assistant for UVA Darden MSBA students looking to connect with classmates based on career backgrounds.
@@ -263,18 +323,10 @@ Format your responses in a clear, scannable way. Use phrases like "Great questio
 
 
 def query_claude(user_question, student_data):
-    """Query Claude with student data context"""
+    """Query Claude with student data context - with error handling"""
     client = get_claude_client()
     
-    #Check if client creation failed (due to missing secrets.toml)
-    if client is None:
-        return "Oops! The app is missing its API key. Please contact the administrator."
-    
-    #Convert student data to a readable format for Claude
-    students_context = student_data.to_dict('records')
-    client = get_claude_client()
-    
-    #Convert student data to a readable format for Claude
+    # Convert student data to a readable format for Claude
     students_context = student_data.to_dict('records')
     context = json.dumps(students_context, indent=2)
     
@@ -295,9 +347,20 @@ Please search through the students and provide helpful recommendations for who t
                 {"role": "user", "content": user_prompt}
             ]
         )
-        return message.content[0].text
+        response = message.content[0].text
+        
+        # Log successful query (without storing actual content)
+        log_query(len(user_question), len(response), success=True)
+        
+        return response
+        
     except Exception as e:
-        return f"Oops! I had trouble processing that. Error: {str(e)}"
+        # Log the actual error for admins
+        logging.error(f"API Error: {str(e)}")
+        log_query(len(user_question), 0, success=False)
+        
+        # Show generic message to users (don't leak system info)
+        return "I'm having trouble processing your request right now. Please try again in a moment. If this continues, please contact support."
 
 #Initialize session state for chat history
 if 'messages' not in st.session_state:
@@ -521,22 +584,40 @@ for message in st.session_state.messages:
         """, unsafe_allow_html=True)
 
 
-#Chat input
+# Chat input with security features
 user_input = st.chat_input("Ask me anything about your classmates' backgrounds...")
 
 if user_input:
-    #Add user message to history
-    st.session_state.messages.append({"role": "user", "content": user_input})
+    # Security Check 1: Sanitize input
+    sanitized_input = sanitize_input(user_input)
     
-    #Get Claude's response
+    if not sanitized_input or len(sanitized_input) < 3:
+        st.error("Invalid input. Please enter a valid question (at least 3 characters).")
+        logging.warning(f"Invalid input rejected - length: {len(user_input)}")
+        st.stop()
+    
+    # Security Check 2: Rate limiting
+    if not check_rate_limit():
+        st.warning("You've reached the hourly query limit (20 queries/hour). Please try again later.")
+        logging.warning("Rate limit exceeded")
+        st.stop()
+    
+    # Mark welcome modal as shown after first interaction
+    if 'shown_welcome' in st.session_state:
+        st.session_state.shown_welcome = True
+    
+    # Add user message to history
+    st.session_state.messages.append({"role": "user", "content": sanitized_input})
+    
+    # Get Claude's response
     with st.spinner("🔍 Searching through your classmates..."):
         df = load_student_data()
-        response = query_claude(user_input, df)
+        response = query_claude(sanitized_input, df)
     
-    #Add assistant response to history
+    # Add assistant response to history
     st.session_state.messages.append({"role": "assistant", "content": response})
     
-    #Rerun to display new messages
+    # Rerun to display new messages
     st.rerun()
 
 #Welcome message if no chat history
@@ -581,7 +662,7 @@ for idx, (_, student) in enumerate(sample_students.iterrows()):
                    <strong>Past:</strong> {student['past_companies']}
                 </p>
                  <p style="font-size: 0.8rem; color: #888;">
-                     📊 {student['industries']}
+                    {student['industries']}
                  </p>
             </div>
             """, unsafe_allow_html=True)
