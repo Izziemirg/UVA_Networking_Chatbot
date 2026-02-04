@@ -6,7 +6,7 @@ import logging
 from datetime import datetime, timedelta
 import os
 
-# Set up audit logging
+## Set up audit logging
 logging.basicConfig(
     filename='hoos_who_audit.log',
     level=logging.INFO,
