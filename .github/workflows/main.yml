@@ -14,7 +14,9 @@ jobs:
         with:
           fetch-depth: 0
           lfs: true
-      - name: Push to hub
+      - name: Pull and push to hub
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: git push https://Izziemirg:$HF_TOKEN@huggingface.co/spaces/Izziemirg/hoos-who main
+        run: |
+            git pull https://Izziemirg:$HF_TOKEN@huggingface.co/spaces/Izziemirg/hoos-who main --rebase
+            git push https://Izziemirg:$HF_TOKEN@huggingface.co/spaces/Izziemirg/hoos-who main
