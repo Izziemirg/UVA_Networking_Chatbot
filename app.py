@@ -523,10 +523,6 @@ def show_career_services_modal():
         <p style='text-align: center; color: white; font-size: 1.1rem; line-height: 1.6; margin-bottom: 1.5rem;'>Before you start exploring your classmate connections...</p>
     """, unsafe_allow_html=True)
     
-    # Header and Introduction 
-    st.markdown("<h2 style='color: white; margin-bottom: 1rem; font-size: 2rem;'>Welcome to Hoos Who?</h2>", unsafe_allow_html=True)
-    st.markdown("<p style='color: white; font-size: 1.1rem; line-height: 1.6;'>Before you start exploring your classmate connections...</p>", unsafe_allow_html=True)
-
     # Message box with UVA Grounds background (Text is centered here)
     message_box_html = (
         "<div style='position: relative; padding: 2rem; border-radius: 15px; border: 3px solid #E57200; "
