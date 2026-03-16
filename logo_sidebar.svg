@@ -1,0 +1,20 @@
+<svg width="200" viewBox="0 0 680 160" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <style>
+            @font-face {
+                font-family: 'Lobster';
+                src: url('https://fonts.gstatic.com/s/lobster/v28/neILzCirqoswsqX9_oWsMqEzSJQ.woff2') format('woff2');
+            }
+        </style>
+    </defs>
+    <text x="340" y="95" text-anchor="middle" 
+          font-family="Lobster, cursive" 
+          font-size="90" 
+          font-style="italic"
+          fill="#E57200" 
+          stroke="white" 
+          stroke-width="5" 
+          paint-order="stroke fill">Hoos Who?</text>
+    <line x1="120" y1="125" x2="540" y2="115" stroke="white" stroke-width="5" stroke-linecap="round"/>
+    <line x1="120" y1="125" x2="540" y2="115" stroke="#E57200" stroke-width="3" stroke-linecap="round"/>
+</svg>
