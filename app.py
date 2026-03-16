@@ -372,9 +372,31 @@ with st.sidebar:
     st.markdown("""
         <div class="logo-container">
             <img src="https://report.honor.virginia.edu/sites/report.honor/files/uva_centrd_rgb_white.png" 
-             style="width: 150px; margin-bottom: 1rem;">
-            <h1 style='color: white; margin: 0; font-size: 2rem;'>Hoos Who?</h1>
-            <p style='color: rgba(255,255,255,0.9); margin-top: 0.5rem; font-size: 0.9rem;'>UVA Darden MSBA 2026 Network</p>
+             style="width: 150px; margin-bottom: 0.5rem;">
+            
+            <!-- Hoos Who? Logo (smaller for sidebar) -->
+            <div style='margin-bottom: 0.5rem;'>
+                <svg width="200" viewBox="0 0 680 160" style="max-width: 100%;">
+                    <style>
+                        @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+                        .sidebar-logo-text { 
+                            font-family: 'Lobster', cursive; 
+                            font-size: 90px; 
+                            fill: #E57200;
+                            stroke: white;
+                            stroke-width: 5;
+                            paint-order: stroke fill;
+                            font-weight: 400;
+                            font-style: italic;
+                        }
+                    </style>
+                    <text x="340" y="95" class="sidebar-logo-text" text-anchor="middle">Hoos Who?</text>
+                    <line x1="120" y1="125" x2="540" y2="115" stroke="white" stroke-width="5" stroke-linecap="round"/>
+                    <line x1="120" y1="125" x2="540" y2="115" stroke="#E57200" stroke-width="3" stroke-linecap="round"/>
+                </svg>
+            </div>
+            
+            <p style='color: rgba(255,255,255,0.9); margin-top: 0; font-size: 0.9rem;'>UVA Darden MSBA 2026 Network</p>
         </div>
     """, unsafe_allow_html=True)
     
