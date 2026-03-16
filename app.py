@@ -372,29 +372,40 @@ if 'messages' not in st.session_state:
     st.session_state.messages = []
 
 with st.sidebar:
-    # UVA Logo + Hoos Who? Logo combined
     st.markdown("""
         <div style='text-align: center;'>
             <img src="https://report.honor.virginia.edu/sites/report.honor/files/uva_centrd_rgb_white.png" 
                  style="width: 150px; margin-bottom: 0.5rem;">
-            
-            <svg width="200" viewBox="0 0 680 160" xmlns="http://www.w3.org/2000/svg">
-                <text x="340" y="95" text-anchor="middle" 
-                      style="font-family: 'Lobster', cursive; 
-                             font-size: 90px; 
-                             font-style: italic;
-                             fill: #E57200; 
-                             stroke: white; 
-                             stroke-width: 5; 
-                             paint-order: stroke fill;">Hoos Who?</text>
-                <line x1="120" y1="125" x2="540" y2="115" stroke="white" stroke-width="5" stroke-linecap="round"/>
-                <line x1="120" y1="125" x2="540" y2="115" stroke="#E57200" stroke-width="3" stroke-linecap="round"/>
-            </svg>
-            
-            <p style='color: rgba(255,255,255,0.9); margin-top: 0.5rem; font-size: 0.9rem;'>
-                UVA Darden MSBA 2026 Network
-            </p>
         </div>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("""
+        <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+        <div style='text-align: center; margin: 0.5rem 0;'>
+            <h1 style='font-family: "Lobster", cursive; 
+                       font-size: 2.8rem; 
+                       font-style: italic;
+                       color: #E57200;
+                       text-shadow: -2px -2px 0 white, 2px -2px 0 white, -2px 2px 0 white, 2px 2px 0 white;
+                       margin: 0;
+                       line-height: 1;'>Hoos Who?</h1>
+            <div style='width: 140px; 
+                        height: 3px; 
+                        background: white; 
+                        margin: 0.3rem auto 0 auto;
+                        transform: skewX(-10deg);'></div>
+            <div style='width: 140px; 
+                        height: 2px; 
+                        background: #E57200; 
+                        margin: -3px auto 0 auto;
+                        transform: skewX(-10deg);'></div>
+        </div>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("""
+        <p style='text-align: center; color: rgba(255,255,255,0.9); margin-top: 0.5rem; font-size: 0.9rem;'>
+            UVA Darden MSBA 2026 Network
+        </p>
     """, unsafe_allow_html=True)
     
     st.markdown("---")
