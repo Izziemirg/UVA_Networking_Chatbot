@@ -383,10 +383,10 @@ with st.sidebar:
         <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
         <div style='text-align: center; margin: 0.5rem 0;'>
             <h1 style='font-family: "Lobster", cursive; 
-                       font-size: 2.8rem; 
+                       font-size: 2.5rem; 
                        font-style: italic;
                        color: #E57200;
-                       text-shadow: -2px -2px 0 white, 2px -2px 0 white, -2px 2px 0 white, 2px 2px 0 white;
+                       -webkit-text-stroke: 2px white;
                        margin: 0;
                        line-height: 1;'>Hoos Who?</h1>
             <div style='width: 140px; 
