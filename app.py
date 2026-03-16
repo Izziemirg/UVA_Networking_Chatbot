@@ -380,13 +380,8 @@ with st.sidebar:
         </div>
     """, unsafe_allow_html=True)
     
-    # Hoos Who? Logo - Data URI approach
-    st.markdown("""
-        <div style='text-align: center; margin: 0.5rem 0;'>
-            <img src='data:image/svg+xml,%3Csvg width="200" viewBox="0 0 680 160" xmlns="http://www.w3.org/2000/svg"%3E%3Cstyle%3E@import url("https://fonts.googleapis.com/css2?family=Lobster%26display=swap");.logo-text{font-family:"Lobster",cursive;font-size:90px;fill:%23E57200;stroke:white;stroke-width:5;paint-order:stroke fill;font-weight:400;font-style:italic;}%3C/style%3E%3Ctext x="340" y="95" class="logo-text" text-anchor="middle"%3EHoos Who?%3C/text%3E%3Cline x1="120" y1="125" x2="540" y2="115" stroke="white" stroke-width="5" stroke-linecap="round"/%3E%3Cline x1="120" y1="125" x2="540" y2="115" stroke="%23E57200" stroke-width="3" stroke-linecap="round"/%3E%3C/svg%3E' 
-                 style='width: 200px; max-width: 100%;'>
-        </div>
-    """, unsafe_allow_html=True)
+    # Hoos Who? Logo
+    st.image("logo_sidebar.svg", width=200)
     
     # Subtitle
     st.markdown("""
