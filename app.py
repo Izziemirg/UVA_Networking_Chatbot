@@ -289,7 +289,7 @@ st.markdown(f"""
     """, unsafe_allow_html=True)
 
 #Load student data
-@st.cache_data
+@st.cache_data(ttl=3600, show_spinner=False)
 def load_student_data():
     return pd.read_csv('student_data.csv')
 
