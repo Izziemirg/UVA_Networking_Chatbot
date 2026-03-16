@@ -499,7 +499,7 @@ def show_career_services_modal():
 # Hoos Who? Logo
     st.markdown("""
         <div style='text-align: center; margin-bottom: 1.5rem;'>
-            <svg width="320" viewBox="0 0 680 160" style="max-width: 100%;">
+            <svg width="400" viewBox="0 0 680 160" style="max-width: 100%;">
                 <style>
                     @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
                     .logo-text { 
