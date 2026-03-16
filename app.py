@@ -561,7 +561,7 @@ def show_career_services_modal():
                           border-radius: 8px;
                           display: inline-block;
                           transition: all 0.3s ease;'>
-                   📅 Schedule a time to meet with them →
+                   📅  Schedule a time to meet with them →
                 </a>
             </p>
         </div>
