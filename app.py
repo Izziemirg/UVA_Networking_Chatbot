@@ -372,22 +372,13 @@ if 'messages' not in st.session_state:
     st.session_state.messages = []
 
 with st.sidebar:
-    # UVA Logo
+    # Logo/Header section
     st.markdown("""
-        <div style='text-align: center;'>
+        <div class="logo-container">
             <img src="https://report.honor.virginia.edu/sites/report.honor/files/uva_centrd_rgb_white.png" 
-                 style="width: 150px; margin-bottom: 0.5rem;">
+                 style="width: 150px; margin-bottom: 1rem;">
+            <p style='color: rgba(255,255,255,0.9); margin-top: 0.5rem; font-size: 0.9rem;'>UVA Darden MSBA 2026 Network</p>
         </div>
-    """, unsafe_allow_html=True)
-    
-    # Hoos Who? Logo
-    st.image("logo_sidebar.svg", width=200)
-    
-    # Subtitle
-    st.markdown("""
-        <p style='text-align: center; color: rgba(255,255,255,0.9); margin-top: 0rem; font-size: 0.9rem;'>
-            UVA Darden MSBA 2026 Network
-        </p>
     """, unsafe_allow_html=True)
     
     st.markdown("---")
