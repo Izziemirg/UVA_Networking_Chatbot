@@ -496,11 +496,32 @@ def show_career_services_modal():
     
     # --- Content Rendering using Native Streamlit Components ---
     
-    # Logo: Wrapped in columns to force centering
-    logo_col1, logo_col2, logo_col3, logo_col4, logo_col5, logo_col6, logo_col7, logo_col8, logo_col9, logo_col10 = st.columns([1, 1, 1, 1, 1, 1, 1, 1, 1, 1])
-    with logo_col5:
-        st.image("https://media.cnn.com/api/v1/images/stellar/prod/200617130257-01-uva-reworked-logo-0616.jpg?q=x_0,y_0,h_1687,w_2997,c_fill/h_653,w_1160/f_avif", 
-                 width=120)
+# Hoos Who? Logo
+    st.markdown("""
+        <div style='text-align: center; margin-bottom: 1.5rem;'>
+            <svg width="320" viewBox="0 0 680 160" style="max-width: 100%;">
+                <style>
+                    @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+                    .logo-text { 
+                        font-family: 'Lobster', cursive; 
+                        font-size: 90px; 
+                        fill: #E57200;
+                        stroke: white;
+                        stroke-width: 5;
+                        paint-order: stroke fill;
+                        font-weight: 400;
+                        font-style: italic;
+                    }
+                </style>
+                <text x="340" y="95" class="logo-text" text-anchor="middle">Hoos Who?</text>
+                <line x1="120" y1="125" x2="540" y2="115" stroke="white" stroke-width="5" stroke-linecap="round"/>
+                <line x1="120" y1="125" x2="540" y2="115" stroke="#E57200" stroke-width="3" stroke-linecap="round"/>
+            </svg>
+        </div>
+    
+        <h2 style='text-align: center; color: white; margin-bottom: 1rem; font-size: 1.5rem;'>Welcome!</h2>
+        <p style='text-align: center; color: white; font-size: 1.1rem; line-height: 1.6; margin-bottom: 1.5rem;'>Before you start exploring your classmate connections...</p>
+    """, unsafe_allow_html=True)
     
     # Header and Introduction 
     st.markdown("<h2 style='color: white; margin-bottom: 1rem; font-size: 2rem;'>Welcome to Hoos Who?</h2>", unsafe_allow_html=True)
