@@ -6,6 +6,11 @@ import logging
 from datetime import datetime, timedelta
 import os
 
+# Load Google Fonts globally
+st.markdown("""
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+""", unsafe_allow_html=True)
+
 ### Set up audit logging
 logging.basicConfig(
     filename='hoos_who_audit.log',
@@ -366,44 +371,30 @@ Please search through the students and provide helpful recommendations for who t
 if 'messages' not in st.session_state:
     st.session_state.messages = []
 
-# Sidebar with enhanced styling
 with st.sidebar:
-    # UVA Logo
+    # UVA Logo + Hoos Who? Logo combined
     st.markdown("""
         <div style='text-align: center;'>
             <img src="https://report.honor.virginia.edu/sites/report.honor/files/uva_centrd_rgb_white.png" 
                  style="width: 150px; margin-bottom: 0.5rem;">
-        </div>
-    """, unsafe_allow_html=True)
-    
-    # Hoos Who? Logo
-    st.markdown("""
-        <div style='text-align: center; margin-bottom: 0.5rem;'>
+            
             <svg width="200" viewBox="0 0 680 160" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <style>
-                        @import url('https://fonts.googleapis.com/css2?family=Lobster&amp;display=swap');
-                    </style>
-                </defs>
                 <text x="340" y="95" text-anchor="middle" 
-                      font-family="Lobster, cursive" 
-                      font-size="90" 
-                      font-style="italic"
-                      fill="#E57200" 
-                      stroke="white" 
-                      stroke-width="5" 
-                      paint-order="stroke fill">Hoos Who?</text>
+                      style="font-family: 'Lobster', cursive; 
+                             font-size: 90px; 
+                             font-style: italic;
+                             fill: #E57200; 
+                             stroke: white; 
+                             stroke-width: 5; 
+                             paint-order: stroke fill;">Hoos Who?</text>
                 <line x1="120" y1="125" x2="540" y2="115" stroke="white" stroke-width="5" stroke-linecap="round"/>
                 <line x1="120" y1="125" x2="540" y2="115" stroke="#E57200" stroke-width="3" stroke-linecap="round"/>
             </svg>
+            
+            <p style='color: rgba(255,255,255,0.9); margin-top: 0.5rem; font-size: 0.9rem;'>
+                UVA Darden MSBA 2026 Network
+            </p>
         </div>
-    """, unsafe_allow_html=True)
-    
-    # Subtitle
-    st.markdown("""
-        <p style='text-align: center; color: rgba(255,255,255,0.9); margin-top: 0; font-size: 0.9rem;'>
-            UVA Darden MSBA 2026 Network
-        </p>
     """, unsafe_allow_html=True)
     
     st.markdown("---")
