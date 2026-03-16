@@ -450,34 +450,34 @@ with st.sidebar:
     """, unsafe_allow_html=True)
 
 # Main content header with Hoos Who? logo
-    st.markdown("""
-        <div style='text-align: center; margin-bottom: 2rem;'>
-            <!-- Hoos Who? Logo -->
-            <div style='margin-bottom: 1rem;'>
-                <svg width="450" viewBox="0 0 680 160" style="max-width: 100%;">
-                    <style>
-                        @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
-                        .main-logo-text { 
-                            font-family: 'Lobster', cursive; 
-                            font-size: 90px; 
-                            fill: #E57200;
-                            stroke: white;
-                            stroke-width: 5;
-                            paint-order: stroke fill;
-                            font-weight: 400;
-                            font-style: italic;
-                        }
-                    </style>
-                    <text x="340" y="95" class="main-logo-text" text-anchor="middle">Hoos Who?</text>
-                    <line x1="120" y1="125" x2="540" y2="115" stroke="white" stroke-width="5" stroke-linecap="round"/>
-                    <line x1="120" y1="125" x2="540" y2="115" stroke="#E57200" stroke-width="3" stroke-linecap="round"/>
-                </svg>
-            </div>
-            <p style='color: white; margin-top: 0.5rem; font-size: 1rem; line-height: 1.4rem;'>
-                 Identify and connect with your MSBA classmates working at your dream company or dream industry 
-            </p>
+st.markdown("""
+    <div style='text-align: center; margin-bottom: 2rem;'>
+        <!-- Hoos Who? Logo -->
+        <div style='margin-bottom: 1rem;'>
+            <svg width="450" viewBox="0 0 680 160" style="max-width: 100%;">
+                <style>
+                    @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+                    .main-logo-text { 
+                        font-family: 'Lobster', cursive; 
+                        font-size: 90px; 
+                        fill: #E57200;
+                        stroke: white;
+                        stroke-width: 5;
+                        paint-order: stroke fill;
+                        font-weight: 400;
+                        font-style: italic;
+                    }
+                </style>
+                <text x="340" y="95" class="main-logo-text" text-anchor="middle">Hoos Who?</text>
+                <line x1="120" y1="125" x2="540" y2="115" stroke="white" stroke-width="5" stroke-linecap="round"/>
+                <line x1="120" y1="125" x2="540" y2="115" stroke="#E57200" stroke-width="3" stroke-linecap="round"/>
+            </svg>
         </div>
-    """, unsafe_allow_html=True)
+        <p style='color: white; margin-top: 0.5rem; font-size: 1rem; line-height: 1.4rem;'>
+            Identify and connect with your MSBA classmates working at your dream company or dream industry
+        </p>
+    </div>
+""", unsafe_allow_html=True)
 
 
 st.markdown("---")
