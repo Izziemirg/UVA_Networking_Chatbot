@@ -372,6 +372,7 @@ if 'messages' not in st.session_state:
     st.session_state.messages = []
 
 with st.sidebar:
+    # UVA Logo
     st.markdown("""
         <div style='text-align: center;'>
             <img src="https://report.honor.virginia.edu/sites/report.honor/files/uva_centrd_rgb_white.png" 
@@ -379,31 +380,17 @@ with st.sidebar:
         </div>
     """, unsafe_allow_html=True)
     
+    # Hoos Who? Logo - Data URI approach
     st.markdown("""
-        <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
         <div style='text-align: center; margin: 0.5rem 0;'>
-            <h1 style='font-family: "Lobster", cursive; 
-                       font-size: 2.5rem; 
-                       font-style: italic;
-                       color: #E57200;
-                       -webkit-text-stroke: 2px white;
-                       margin: 0;
-                       line-height: 1;'>Hoos Who?</h1>
-            <div style='width: 140px; 
-                        height: 3px; 
-                        background: white; 
-                        margin: 0.3rem auto 0 auto;
-                        transform: skewX(-10deg);'></div>
-            <div style='width: 140px; 
-                        height: 2px; 
-                        background: #E57200; 
-                        margin: -3px auto 0 auto;
-                        transform: skewX(-10deg);'></div>
+            <img src='data:image/svg+xml,%3Csvg width="200" viewBox="0 0 680 160" xmlns="http://www.w3.org/2000/svg"%3E%3Cstyle%3E@import url("https://fonts.googleapis.com/css2?family=Lobster%26display=swap");.logo-text{font-family:"Lobster",cursive;font-size:90px;fill:%23E57200;stroke:white;stroke-width:5;paint-order:stroke fill;font-weight:400;font-style:italic;}%3C/style%3E%3Ctext x="340" y="95" class="logo-text" text-anchor="middle"%3EHoos Who?%3C/text%3E%3Cline x1="120" y1="125" x2="540" y2="115" stroke="white" stroke-width="5" stroke-linecap="round"/%3E%3Cline x1="120" y1="125" x2="540" y2="115" stroke="%23E57200" stroke-width="3" stroke-linecap="round"/%3E%3C/svg%3E' 
+                 style='width: 200px; max-width: 100%;'>
         </div>
     """, unsafe_allow_html=True)
     
+    # Subtitle
     st.markdown("""
-        <p style='text-align: center; color: rgba(255,255,255,0.9); margin-top: 0.5rem; font-size: 0.9rem;'>
+        <p style='text-align: center; color: rgba(255,255,255,0.9); margin-top: 0rem; font-size: 0.9rem;'>
             UVA Darden MSBA 2026 Network
         </p>
     """, unsafe_allow_html=True)
