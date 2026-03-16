@@ -368,8 +368,6 @@ if 'messages' not in st.session_state:
 
 # Sidebar with enhanced styling
 with st.sidebar:
-# Sidebar with enhanced styling
-with st.sidebar:
     # UVA Logo
     st.markdown("""
         <div style='text-align: center;'>
