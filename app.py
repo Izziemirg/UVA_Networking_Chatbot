@@ -383,6 +383,11 @@ with st.sidebar:
     
     st.markdown("---")
     
+    st.info(
+        "**Student Project Disclaimer:** This networking tool is an independent "
+        "student project created for the MSBA 2026 cohort. It is not an official "
+        "University of Virginia, Darden, or McIntire application."
+    )
     st.markdown("**How to use this chatbot:**")
     st.markdown("""
     Ask me questions like:
