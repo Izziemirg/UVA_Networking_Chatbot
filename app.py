@@ -382,14 +382,6 @@ with st.sidebar:
     """, unsafe_allow_html=True)
     
     st.markdown("---")
-
-
-    st.markdown("**Student Project Disclaimer:**")
-    st.markdown("""
-        This networking tool is an independent
-        student project created for the MSBA 2026 cohort. It is not an official
-        University of Virginia, Darden, or McIntire application."""
-    )
     
     st.markdown("**How to use this chatbot:**")
     st.markdown("""
@@ -486,6 +478,10 @@ st.markdown("""
         </div>
         <p style='color: white; margin-top: 0.5rem; font-size: 1rem; line-height: 1.4rem;'>
             Identify and connect with your MSBA classmates working at your dream company or dream industry
+        </p>
+        <p style='color: #d1d5db; margin-top: 0.8rem; font-size: 0.85rem; line-height: 1.2rem; font-style: italic;'>
+        Student Project Disclaimer: This networking tool is an independent student project created for the MSBA 2026 cohort. 
+        It is not an official University of Virginia, Darden, or McIntire application.
         </p>
     </div>
 """, unsafe_allow_html=True)
