@@ -9,6 +9,14 @@ import requests
 import json
 import streamlit as st
 
+st.set_page_config(...)
+
+if 'messages' not in st.session_state:
+    st.session_state.messages = []
+
+if 'shown_welcome' not in st.session_state:
+    st.session_state.shown_welcome = False
+
 #New endpoint tied to professional portfolio
 CENTRAL_BANK_URL = "https://izziemirghani.com/api/chat"
 
@@ -305,14 +313,14 @@ def query_claude(user_question, student_data):
     
     # Convert student data to a readable format for Claude
     students_context = student_data.to_dict('records')
-    context = json.dumps(students_context, indent=2)
+    context_data = json.dumps(students_context, indent=2)
 
     payload = {
         "mode": "hoos-who",
         "messages": [
             {
                 "role": "user", 
-                "content": f"UVA MSBA Student Database:\n{context_json}\n\nUser Question: {user_question}"
+                "content": f"UVA MSBA Student Database:\n{context_data}\n\nUser Question: {user_question}"
             }
         ]
     }
@@ -459,12 +467,6 @@ st.markdown("""
 
 
 st.markdown("---")
-
-import streamlit as st
-
-# --- Initial State Setup ---
-if 'shown_welcome' not in st.session_state:
-    st.session_state.shown_welcome = False
 
 # Career Services Modal Popup with UVA Imagery
 @st.dialog("University of Virginia  |  Darden School of Business", width="large")
