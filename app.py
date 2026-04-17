@@ -544,6 +544,12 @@ def show_career_services_modal():
     
         <h2 style='text-align: center; color: white; margin-bottom: 1rem; font-size: 1.5rem;'>Welcome!</h2>
         <p style='text-align: center; color: white; font-size: 1.1rem; line-height: 1.6; margin-bottom: 1.5rem;'>Before you start exploring your classmate connections...</p>
+        
+        <p style='text-align: center; color: #d1d5db; font-size: 0.8rem; line-height: 1.2; font-style: italic; margin-bottom: 1.5rem; padding: 0 20px;'>
+            Student Project Disclaimer: This networking tool is an independent student project created for the MSBA 2026 cohort. 
+            It is not an official University of Virginia, Darden, or McIntire application.
+        </p>
+    
     """, unsafe_allow_html=True)
     
     # Message box with UVA Grounds background (Text is centered here)
