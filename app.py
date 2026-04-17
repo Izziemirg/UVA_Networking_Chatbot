@@ -336,16 +336,13 @@ def query_claude(user_question, student_data):
             response = requests.post(
                 CENTRAL_BANK_URL, 
                 json=payload, 
-                stream=True, 
                 timeout=60
             )
             response.raise_for_status()
 
-            full_response = ""
-            for line in response.iter_lines():
-                if line:
-                    # Your Vercel API sends 'text/event-stream'
-                    full_response += line.decode('utf-8')
+            result = response.json()
+
+            full_response = result.get("content", "No content returned.")
 
             log_query(len(user_question), len(full_response), success=True)
             return full_response
@@ -353,7 +350,8 @@ def query_claude(user_question, student_data):
     except Exception as e:
         logging.error(f"Central Bank Error: {str(e)}")
         log_query(len(user_question), 0, success=False)
-        return "I'm having trouble reaching my networking brain. Please try again in a moment."
+        # return "I'm having trouble reaching my networking brain. Please try again in a moment."
+        return f"Connection Error: {str(e)}"
     
 with st.sidebar:
     # Logo/Header section
