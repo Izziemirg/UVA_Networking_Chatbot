@@ -299,39 +299,6 @@ st.markdown(f"""
 def load_student_data():
     return pd.read_csv('student_data.csv')
 
-#Initialize Claude client
-def get_claude_client():
-    """Get Claude client with secure API key handling"""
-    api_key = os.environ.get('ANTHROPIC_API_KEY')
-    
-    if not api_key:
-        st.error("⚠️ API key not configured. Please contact administrator.")
-        logging.error("API key missing - application cannot function")
-        st.stop()
-    
-    return Anthropic(api_key=api_key)
-
-#System prompt for Claude
-SYSTEM_PROMPT = """You are "Hoos Who?" - a helpful assistant for UVA Darden MSBA students looking to connect with classmates based on career backgrounds.
-
-You have access to a database of MSBA student profiles with their:
-- Current company and role
-- Past work experience
-- Industries they've worked in
-- Contact information
-- Brief bios
-
-When a user asks a question, search through the student data and provide helpful matches. Be friendly, concise, and always include:
-1. Student name(s) that match their query
-2. Why they're a good match
-3. Their current role and company
-4. Relevant past experience
-5. How to contact them
-
-If multiple students match, list the top 2-3 most relevant ones. Always maintain a friendly, collegial tone - these are classmates helping classmates!
-
-Format your responses in a clear, scannable way. Use phrases like "Great question!" or "Here's who I'd recommend reaching out to:" to keep it conversational."""
-
 
 def query_claude(user_question, student_data):
     """Rewired: Now calls the Vercel Central Bank Proxy securely."""
