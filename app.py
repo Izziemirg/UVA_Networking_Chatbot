@@ -9,7 +9,12 @@ import requests
 import json
 import streamlit as st
 
-st.set_page_config(...)
+st.set_page_config(
+    page_title="Hoos Who? - UVA MSBA 2026 Network",
+    page_icon="",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
 
 if 'messages' not in st.session_state:
     st.session_state.messages = []
