@@ -5,6 +5,12 @@ from anthropic import Anthropic
 import logging
 from datetime import datetime, timedelta
 import os
+import requests
+import json
+import streamlit as st
+
+#New endpoint tied to professional portfolio
+CENTRAL_BANK_URL = "https://izziemirghani.com/api/chat"
 
 # Load Google Fonts globally
 st.markdown("""
@@ -328,49 +334,47 @@ Format your responses in a clear, scannable way. Use phrases like "Great questio
 
 
 def query_claude(user_question, student_data):
-    """Query Claude with student data context - with error handling"""
-    client = get_claude_client()
+    """Rewired: Now calls the Vercel Central Bank Proxy securely."""
     
     # Convert student data to a readable format for Claude
     students_context = student_data.to_dict('records')
     context = json.dumps(students_context, indent=2)
-    
-    user_prompt = f"""Here's our current MSBA student database:
 
-{context}
+    payload = {
+        "mode": "hoos-who",
+        "messages": [
+            {
+                "role": "user", 
+                "content": f"UVA MSBA Student Database:\n{context_json}\n\nUser Question: {user_question}"
+            }
+        ]
+    }
 
-User question: {user_question}
-
-Please search through the students and provide helpful recommendations for who they should connect with based on their question."""
-    
     try:
-        message = client.messages.create(
-            model="claude-sonnet-4-20250514",
-            max_tokens=1000,
-            system=SYSTEM_PROMPT,
-            messages=[
-                {"role": "user", "content": user_prompt}
-            ]
-        )
-        response = message.content[0].text
-        
-        # Log successful query (without storing actual content)
-        log_query(len(user_question), len(response), success=True)
-        
-        return response
-        
+        # 3. Request to Vercel
+        with st.spinner("Connecting to the Brain..."):
+            response = requests.post(
+                CENTRAL_BANK_URL, 
+                json=payload, 
+                stream=True, 
+                timeout=60
+            )
+            response.raise_for_status()
+
+            full_response = ""
+            for line in response.iter_lines():
+                if line:
+                    # Your Vercel API sends 'text/event-stream'
+                    full_response += line.decode('utf-8')
+
+            log_query(len(user_question), len(full_response), success=True)
+            return full_response
+
     except Exception as e:
-        # Log the actual error for admins
-        logging.error(f"API Error: {str(e)}")
+        logging.error(f"Central Bank Error: {str(e)}")
         log_query(len(user_question), 0, success=False)
-        
-        # Show generic message to users (don't leak system info)
-        return "I'm having trouble processing your request right now. Please try again in a moment. If this continues, please contact support."
-
-#Initialize session state for chat history
-if 'messages' not in st.session_state:
-    st.session_state.messages = []
-
+        return "I'm having trouble reaching my networking brain. Please try again in a moment."
+    
 with st.sidebar:
     # Logo/Header section
     st.markdown("""
